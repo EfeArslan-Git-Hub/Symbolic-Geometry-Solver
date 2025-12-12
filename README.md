@@ -2,11 +2,18 @@
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.9+-yellow.svg)
-![React](https://img.shields.io/badge/react-18+-cyan.svg)
+![React](https://img.shields.io/badge/react-18.2.0+-cyan.svg)
 ![Status](https://img.shields.io/badge/status-active-green.svg)
 
 > **"Living Math" in your browser.**
 > An interactive, symbolic mathematics engine capable of solving Algebra, Calculus, Geometry, and Physics problems with step-by-step explanations and dynamic 3D visualizations.
+
+## 🛠️ Tech Stack
+
+* **Frontend:** React (Vite), Tailwind CSS, Framer Motion, Plotly.js (3D Viz), KaTeX (Math Rendering)
+* **Backend:** Python 3.9+, FastAPI, Uvicorn
+* **Math Engine:** SymPy (Symbolic Mathematics), NumPy
+* **Architecture:** RESTful API, MVC Pattern
 
 ## 🌟 Key Features
 
@@ -40,6 +47,9 @@
 <div align="center">
   <img src="screenshots/Derivative.PNG" alt="Calculus Steps" width="45%" />
   <img src="screenshots/ChebyshevDistance.PNG" alt="Distance Metrics" width="45%" />
+</div>
+<div align="center">
+  <img src="screenshots/expandFindRoot.PNG" alt="Algebra Expansion" width="60%" />
 </div>
 
 ---
