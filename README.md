@@ -31,7 +31,20 @@
 
 ---
 
-## 🛠 Installation
+## � Gallery
+
+<div align="center">
+  <img src="screenshots/projectileVelocity.PNG" alt="Projectile Motion" width="45%" />
+  <img src="screenshots/SphereRadius5.PNG" alt="3D Sphere" width="45%" />
+</div>
+<div align="center">
+  <img src="screenshots/Derivative.PNG" alt="Calculus Steps" width="45%" />
+  <img src="screenshots/ChebyshevDistance.PNG" alt="Distance Metrics" width="45%" />
+</div>
+
+---
+
+## �🛠 Installation
 
 ### Prerequisites
 -   Python 3.9+
