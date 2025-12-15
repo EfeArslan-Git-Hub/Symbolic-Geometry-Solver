@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, APIRouter
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import sympy
@@ -18,8 +18,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-router = APIRouter(prefix="/api")
 
 class ProblemInput(BaseModel):
     problem: str
@@ -163,7 +161,7 @@ def solve_distance(problem_str: str):
         fig.add_trace(go.Scatter(x=[x1, x2], y=[y1, y2], mode='lines', line=dict(color='cyan', width=3), name='Euclidean'))
         result_latex = f"{latex(dist.evalf(4))}"
         steps = [
-            "**Step 1: Euclidean Distance Formula**\\\\$d = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$.",
+            "**Step 1: Euclidean Distance Formula**\\\\$d = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2}$.",
             f"**Step 2: Substitute**\\\\$d = \\sqrt{{({x2}-{x1})^2 + ({y2}-{y1})^2}}$.",
             f"**Result**\\\\$d \\approx {round(float(dist), 4)}$"
         ]
@@ -317,11 +315,11 @@ def solve_algebra(problem_str: str):
         }
     except: return None
 
-@router.get("/")
+@app.get("/")
 def read_root():
     return {"status": "ok", "message": "Symbolic Geometry Solver Backend is Running"}
 
-@router.post("/solve")
+@app.post("/solve")
 async def solve_problem(input_data: ProblemInput):
     p = input_data.problem
     try:
@@ -343,5 +341,3 @@ async def solve_problem(input_data: ProblemInput):
 
     except Exception as e:
         return {"solution_latex": "\\text{Error}", "steps": [str(e)], "plotData": None}
-
-app.include_router(router)
