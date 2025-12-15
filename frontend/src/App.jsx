@@ -60,17 +60,10 @@ function App() {
     if (isMobile) setIsSidebarOpen(false)
 
     try {
-      // Determine API URL: Use Env Var -> Or Localhost (if dev) -> Or Relative (if prod same-origin)
-      let apiUrl = import.meta.env.VITE_API_URL;
-      if (!apiUrl) {
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-          apiUrl = 'http://127.0.0.1:8000';
-        } else {
-          apiUrl = ''; // Relative path for production (Vercel Serverless)
-        }
-      }
+      // Use environment variable for API URL (defaults to localhost for dev)
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 
-      const response = await axios.post(`${apiUrl}/api/solve`, {
+      const response = await axios.post(`${apiUrl}/solve`, {
         problem: problem
       })
       setSolution(response.data)
@@ -82,15 +75,6 @@ function App() {
       setLoading(false)
     }
   }
-
-  // Check for Mixed Content issues on mount
-  useEffect(() => {
-    // Only check if we have an explicit http URL on an https site
-    const apiUrl = import.meta.env.VITE_API_URL;
-    if (apiUrl && window.location.protocol === 'https:' && apiUrl.startsWith('http:')) {
-      setError("Security Warning: You are accessing an HTTP backend from an HTTPS site. This is often blocked by browsers (Mixed Content).");
-    }
-  }, []);
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && e.ctrlKey) {
