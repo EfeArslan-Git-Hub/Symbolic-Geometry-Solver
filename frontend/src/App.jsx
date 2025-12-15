@@ -60,8 +60,15 @@ function App() {
     if (isMobile) setIsSidebarOpen(false)
 
     try {
-      // Use environment variable for API URL (defaults to localhost for dev)
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+      // Determine API URL: Use Env Var -> Or Localhost (if dev) -> Or Relative (if prod same-origin)
+      let apiUrl = import.meta.env.VITE_API_URL;
+      if (!apiUrl) {
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          apiUrl = 'http://127.0.0.1:8000';
+        } else {
+          apiUrl = ''; // Relative path for production (Vercel Serverless)
+        }
+      }
 
       const response = await axios.post(`${apiUrl}/api/solve`, {
         problem: problem
@@ -78,8 +85,9 @@ function App() {
 
   // Check for Mixed Content issues on mount
   useEffect(() => {
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
-    if (window.location.protocol === 'https:' && apiUrl.startsWith('http:')) {
+    // Only check if we have an explicit http URL on an https site
+    const apiUrl = import.meta.env.VITE_API_URL;
+    if (apiUrl && window.location.protocol === 'https:' && apiUrl.startsWith('http:')) {
       setError("Security Warning: You are accessing an HTTP backend from an HTTPS site. This is often blocked by browsers (Mixed Content).");
     }
   }, []);
