@@ -10,7 +10,7 @@ Online version https://symbolic-geometry-solver.vercel.app/
 > **"Living Math" in your browser.**
 > An interactive, symbolic mathematics engine capable of solving Algebra, Calculus, Geometry, and Physics problems with step-by-step explanations and dynamic 3D visualizations.
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack 
 
 * **Frontend:** React (Vite), Tailwind CSS, Framer Motion, Plotly.js (3D Viz), KaTeX (Math Rendering)
 * **Backend:** Python 3.9+, FastAPI, Uvicorn
