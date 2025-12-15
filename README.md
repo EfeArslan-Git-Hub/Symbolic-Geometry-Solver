@@ -37,6 +37,13 @@
 -   **Interactive Examples**: Learn the syntax instantly with the built-in "Example Chips".
 
 ---
+## 🧠 How It Works
+
+1.  **Input Parsing:** The user's natural language or mathematical syntax is parsed by the **FastAPI** backend.
+2.  **Symbolic Computation:** **SymPy** processes the logic, solving equations symbolically (not just numerically).
+3.  **Data Serialization:** Results are converted into **LaTeX** (for equations) and **JSON** (for graphs).
+4.  **Dynamic Rendering:** React receives the data and renders interactive **3D plots** and mathematical proofs in real-time.
+---
 
 ## � Gallery
 

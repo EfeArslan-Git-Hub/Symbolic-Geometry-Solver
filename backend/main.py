@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, APIRouter
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import sympy
@@ -18,6 +18,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+router = APIRouter(prefix="/api")
 
 class ProblemInput(BaseModel):
     problem: str
@@ -315,7 +317,11 @@ def solve_algebra(problem_str: str):
         }
     except: return None
 
-@app.post("/solve")
+@router.get("/")
+def read_root():
+    return {"status": "ok", "message": "Symbolic Geometry Solver Backend is Running"}
+
+@router.post("/solve")
 async def solve_problem(input_data: ProblemInput):
     p = input_data.problem
     try:
@@ -337,3 +343,5 @@ async def solve_problem(input_data: ProblemInput):
 
     except Exception as e:
         return {"solution_latex": "\\text{Error}", "steps": [str(e)], "plotData": None}
+
+app.include_router(router)
